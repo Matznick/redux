@@ -1,28 +1,19 @@
 import React from "react";
-import fetchMock from "fetch-mock";
 import ReactDOM from "react-dom";
 import Item from "./Item";
 
-describe("fetch item and render it correctly", () => {
-  afterEach(() => {
-    fetchMock.restore();
-  });
-
-  it("renders without error", async () => {
-    fetchMock.get("https://someUrl", [
+describe("render an item correctly", () => {
+  it("renders without error", () => {
+    const items = [
       {
-        name: "I am an item",
+        name: "a shoe",
       },
-    ]);
-
-    const response = await fetch("https://someUrl");
-    let myJson = await response.json();
-    console.log(myJson);
+    ];
 
     const div = document.createElement("div");
 
     ReactDOM.render(
-      myJson.map((el, i) => {
+      items.map((el, i) => {
         return <Item key={i} item={el} />;
       }),
       div
